@@ -1,0 +1,6 @@
+system/config/db.php
+system/config/env.php
+system/config/development/db.php
+system/config/production/db.php
+system/tmp
+system/logs
