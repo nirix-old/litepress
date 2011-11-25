@@ -1,0 +1,9 @@
+[submodule "system/fuel"]
+	path = system/fuel
+	url = git://github.com/fuel/core.git
+[submodule "system/packages/orm"]
+	path = system/packages/orm
+	url = git://github.com/fuel/orm.git
+[submodule "system/packages/oil"]
+	path = system/packages/oil
+	url = git://github.com/fuel/oil.git
