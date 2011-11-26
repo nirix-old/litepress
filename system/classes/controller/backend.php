@@ -26,25 +26,4 @@ class Controller_Backend extends Controller_LitePress
 			$this->redirect_no_permission();
 		}
 	}
-	
-	/*public function router($method, $params = array())
-	{
-		if (!$this->current_user->group->is_admin or !$this->current_user->group->is_author)
-		{
-			$this->no_permission();
-		}
-		else
-		{
-			$method = 'action_' . $method;
-			
-			if (method_exists($this, $method))
-			{
-				$this->{$method}();
-			}
-			else
-			{
-				$this->show_404();
-			}
-		}
-	}*/
 }
