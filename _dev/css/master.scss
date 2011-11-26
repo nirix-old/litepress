@@ -1,3 +1,4 @@
+/* ### Overlays ### */
 #overlay_blackout {
 	background: #555;
 	z-index: 1000;
@@ -10,6 +11,7 @@
 	z-index: 1100;
 }
 
+/* ### Main Content ### */
 body {
 	background-color: #EEE;
 	font-family: sans-serif;
@@ -71,6 +73,31 @@ h2 {
 	}
 }
 
+#footer {
+	color: #777;
+	font-size: 12px;
+	margin: 40px 0 0 0;
+}
+
+/* ### Articles ### */
+
+article {
+	h2 {
+		margin: 20px 0 10px;
+	}
+	
+	.article_content {
+		margin-bottom: 5px;
+		margin-top: 0;
+	}
+	
+	.article_meta {
+		font-size: 14px;
+		color: #777;
+	}
+}
+
+/* ### Formatting ### */
 
 p {
 	margin: 0 0 15px;
@@ -99,10 +126,4 @@ li {
 
 label {
 	display: block;
-}
-
-#footer {
-	color: #777;
-	font-size: 12px;
-	margin: 40px 0 0 0;
 }
