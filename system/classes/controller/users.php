@@ -34,8 +34,8 @@ class Controller_Users extends Controller_Frontend
 		
 		
 		if (Input::param() != array())
-        {
-            $user->values(array(
+		{
+			$user->values(array(
 				'name' => Input::param('name'),
 				'username' => Input::param('username'),
 				'password' => Input::param('password'),
