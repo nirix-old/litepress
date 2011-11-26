@@ -4,13 +4,18 @@
  * Copyright (C) 2011 Nirix
  *
  * @author Nirix <nrx@nirix.net>
- * @copyright LitePress Team
+ * @copyright Nirix
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3-only
+ */
+
+/**
+ * User controller for handling login, logout,
+ * register and usercp pages.
  *
+ * @author Nirix <nrx@nirix.net>
  * @since 0.1
  * @package LitePress
  */
-
 class Controller_Users extends Controller_Frontend
 {
 	public function action_login()
@@ -23,7 +28,7 @@ class Controller_Users extends Controller_Frontend
 			if ($user = Model_User::authenticate_login(Input::param('username'), Input::param('password')))
 			{
 				Cookie::set('_sess', Crypt::encode($user->login_hash));
-				Response::redirect();
+				Response::redirect('/');
 			}
 			else
 			{
@@ -36,18 +41,16 @@ class Controller_Users extends Controller_Frontend
 	{
 		Cookie::set('_sess', Crypt::encode(rand(100, 900)));
 		Session::set_flash('notice', 'You are now logged out.');
-		Response::redirect();
+		Response::redirect('/');
 	}
 
 	public function action_register()
 	{
 		$this->view = $this->theme->view('users/register');
-		
-		$user = Model_User::forge();
-		
-		$this->view->set('user', $user);
 		$this->template->title[] = 'Register';
 		
+		$user = Model_User::forge();
+		$this->view->set('user', $user);
 		
 		if (Input::param() != array())
 		{
@@ -57,16 +60,6 @@ class Controller_Users extends Controller_Frontend
 				'password' => Input::param('password'),
 				'email' => Input::param('email')
 			));
-			
-			/*try 
-			{
-				$user->save();
-				Response::redirect('login');    
-			}
-			catch (Orm\ValidationFailed $e)
-			{
-				die('err');
-			}*/
 			
 			if ($user->is_valid())
 			{

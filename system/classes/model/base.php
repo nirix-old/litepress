@@ -4,7 +4,7 @@
  * Copyright (C) Nirix
  *
  * @author Nirix <nrx@nirix.net>
- * @copyright LitePress Team
+ * @copyright Nirix
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3-only
  */
 
@@ -16,6 +16,11 @@
  */
 class Model_Base extends \Orm\Model
 {
+	protected static $_observers = array(
+		'Orm\\Observer_CreatedAt' => array('before_insert'),
+		'Orm\\Observer_UpdatedAt' => array('before_save'),
+	);
+	
 	protected $_validation;
 	
 	public function enable_validation()
