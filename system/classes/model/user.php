@@ -17,6 +17,13 @@ class Model_User extends Model_Base
 	protected static $_table_name = 'users';
 	//protected static $_belongs_to = array('group');
 	
+	protected static $_observers = array(
+		'Observer_User',
+		'Orm\\Observer_CreatedAt' => array('before_insert'),
+		'Orm\\Observer_UpdatedAt' => array('before_save'),
+		'Orm\\Observer_Validation' => array('before_save')
+	);
+	
 	protected static $_properties = array(
 		'id',
 		'username',
@@ -24,7 +31,7 @@ class Model_User extends Model_Base
 		'salt',
 		'email',
 		'name',
-		'group_id',
+		'group_id' => array('default' => 4),
 		'login_hash',
 		'created_at',
 		'updated_at'
@@ -32,12 +39,12 @@ class Model_User extends Model_Base
 	
 	public function is_valid()
 	{
-		parent::is_valid();
-		
+		$this->enable_validation();
+				
 		$this->_validation->add_field('name', 'Full name', 'required|min_length[3]');
-		$this->_validation->add_field('username', 'Username', 'required|min_length[3]');
+		$this->_validation->add_field('username', 'Username', 'required|min_length[3]|unique[users.username]');
 		$this->_validation->add_field('password', 'Password', 'required|min_length[3]');
-		$this->_validation->add_field('email', 'Email', 'required|valid_email');
+		$this->_validation->add_field('email', 'Email', 'required|valid_email|unique[users.email]');
 		
 		return $this->_validation->run();
 	}

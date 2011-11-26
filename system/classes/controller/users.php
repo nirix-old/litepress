@@ -42,19 +42,25 @@ class Controller_Users extends Controller_Frontend
 				'email' => Input::param('email')
 			));
 			
+			/*try 
+			{
+				$user->save();
+				Response::redirect('login');    
+			}
+			catch (Orm\ValidationFailed $e)
+			{
+				die('err');
+			}*/
+			
 			if ($user->is_valid())
 			{
-				die('a');
+				$user->save();
+				Response::redirect('login');
 			}
 			else
 			{
 				$this->view->errors = $user->errors();
 			}
-        }
-		
-		if (isset($_POST['username']))
-		{
-			
 		}
 	}
 }
