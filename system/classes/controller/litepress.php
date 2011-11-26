@@ -69,6 +69,25 @@ class Controller_LitePress extends \Controller
 		$this->view = $this->theme->view('errors/no_permission');
 	}
 	
+	public function redirect_no_permission()
+	{
+		Session::set_flash('error', 'It would appear that you don\'t have permission to access this page.');
+		Session::set_flash('login_redirect', Uri::current());
+		Response::redirect('login');
+	}
+	
+	public function show_404()
+	{
+		$this->response->status = 404;
+		$this->view = $this->theme->view('errors/404');
+		
+		$titles = array('Aw, crap!', 'Bloody Hell!', 'Uh Oh!', 'Nope, not here.', 'Huh?');
+		$title = $titles[array_rand($titles)];
+		
+		$this->template->title[] = $title;
+		$this->view->message_title = $title;
+	}
+	
 	public function after($response)
 	{
 		if ($this->view !== null)

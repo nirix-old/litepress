@@ -25,9 +25,6 @@ class Controller_Errors extends Controller_Frontend
 	 */
 	public function action_404()
 	{
-		$messages = array('Aw, crap!', 'Bloody Hell!', 'Uh Oh!', 'Nope, not here.', 'Huh?');
-		
-		$this->template->title[] = 'Woops';
-		$this->template->content = $this->theme->view('errors/404', array('message_title' => $messages[array_rand($messages)]));
+		$this->show_404();
 	}
 }

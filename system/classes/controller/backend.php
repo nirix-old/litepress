@@ -17,7 +17,17 @@
  */
 class Controller_Backend extends Controller_LitePress
 {
-	public function router($method, $params = array())
+	public function before()
+	{
+		parent::before();
+		
+		if (!$this->current_user->group->is_admin or !$this->current_user->group->is_author)
+		{
+			$this->redirect_no_permission();
+		}
+	}
+	
+	/*public function router($method, $params = array())
 	{
 		if (!$this->current_user->group->is_admin or !$this->current_user->group->is_author)
 		{
@@ -26,7 +36,15 @@ class Controller_Backend extends Controller_LitePress
 		else
 		{
 			$method = 'action_' . $method;
-			$this->{$method}();
+			
+			if (method_exists($this, $method))
+			{
+				$this->{$method}();
+			}
+			else
+			{
+				$this->show_404();
+			}
 		}
-	}
+	}*/
 }

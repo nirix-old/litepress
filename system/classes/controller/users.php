@@ -28,10 +28,14 @@ class Controller_Users extends Controller_Frontend
 			if ($user = Model_User::authenticate_login(Input::param('username'), Input::param('password')))
 			{
 				Cookie::set('_sess', Crypt::encode($user->login_hash));
-				Response::redirect('/');
+				Response::redirect(Input::param('redirect') ? Input::param('redirect') : '/');
 			}
 			else
 			{
+				if (Input::param('redirect'))
+				{
+					Session::set_flash('login_redirect', Input::param('redirect'));
+				}
 				$this->view->errors = array('Invalid username and/or password.');
 			}
 		}

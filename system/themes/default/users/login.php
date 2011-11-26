@@ -1,9 +1,12 @@
 <?php echo Form::open(); ?>
-<?php if (isset($errors)): ?>
+<?php if (Session::get_flash('login_redirect')) { ?>
+	<?php echo Form::hidden('redirect', Session::get_flash('login_redirect')); ?>
+<?php } ?>
+<?php if (isset($errors)) { ?>
 	<div class="error">
-		<?php echo Html::ul($errors); ?>
+		<?php echo implode('<br />', $errors); ?>
 	</div>
-<?php endif; ?>
+<?php } ?>
 	<div class="group">
 		<?php echo Form::label('Username', 'username'); ?>
 		<?php echo Form::input('username', '', array('id'=>'username')); ?>
