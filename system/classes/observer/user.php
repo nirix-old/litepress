@@ -6,6 +6,6 @@ class Observer_User extends Orm\Observer
     {
 		$model->salt = rand(1000, 3000);
 		$model->login_hash = sha1($model->salt . time() . $model->username);
-		$model->password = sha1($model->salt . $model->password . $model->salt);
+		$model->password = Model_User::hash_password($model->password, $model->salt);
     }
 }

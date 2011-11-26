@@ -33,7 +33,24 @@ class Controller_LitePress extends \Controller
 		$this->template = $this->theme->view('layouts/' . $this->_render['layout']);
 		$this->template->title = array();
 		
+		$this->_get_user();
+		
 		return parent::before();
+	}
+	
+	private function _get_user()
+	{
+		if (Cookie::get('_sess') and $user = Model_User::find('first', array('where' => array('login_hash' => Crypt::decode(Cookie::get('_sess'))))))
+		{
+			$this->current_user = $user;
+			$this->current_user->_set_logged_in(true);
+		}
+		else
+		{
+			$this->current_user = Model_User::forge(array('username' => 'Guest', 'group_id' => 4));
+			$this->current_user->_set_logged_in(false);
+		}
+		$this->template->set_global('current_user', $this->current_user);
 	}
 	
 	public function after($response)

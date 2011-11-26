@@ -11,9 +11,20 @@
 		<div id="wrapper">
 			<header id="header">
 				<h1>LitePress</h1>
+				<nav id="nav">
+					<ul>
+					<?php if (!$current_user->logged_in()): ?>
+						<li><?php echo Html::anchor('login', 'Login'); ?></li>
+						<li><?php echo Html::anchor('register', 'Register'); ?></li>
+					<?php else: ?>
+						<li><?php echo Html::anchor('usercp', 'UserCP'); ?></li>
+						<li><?php echo Html::anchor('logout', 'Logout'); ?></li>
+					<?php endif; ?>
+					</ul>
+				</nav>
 			</header>
 			<?php if (Session::get_flash('notice')): ?>
-				<div class="notice"><p><?php echo implode('</p><p>', (array) Session::get_flash('notice')); ?></div></p>
+				<div class="notice"><?php echo implode('<br />', (array) Session::get_flash('notice')); ?></div>
 			<?php endif; ?>
 			<section id="page">
 				<?php echo $content; ?>

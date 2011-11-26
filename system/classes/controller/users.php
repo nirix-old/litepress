@@ -17,10 +17,26 @@ class Controller_Users extends Controller_Frontend
 	{
 		$this->template->title[] = 'Login';
 		$this->view = $this->theme->view('users/login');
+		
+		if (Input::param() != array())
+		{
+			if ($user = Model_User::authenticate_login(Input::param('username'), Input::param('password')))
+			{
+				Cookie::set('_sess', Crypt::encode($user->login_hash));
+				Response::redirect();
+			}
+			else
+			{
+				$this->view->errors = array('Invalid username and/or password.');
+			}
+		}
 	}
 
 	public function action_logout()
 	{
+		Cookie::set('_sess', Crypt::encode(rand(100, 900)));
+		Session::set_flash('notice', 'You are now logged out.');
+		Response::redirect();
 	}
 
 	public function action_register()
