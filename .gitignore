@@ -2,6 +2,7 @@
 system/config/db.php
 system/config/env.php
 system/config/crypt.php
+system/config/migrations.php
 system/config/development/db.php
 system/config/production/db.php
 system/tmp
