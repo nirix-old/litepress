@@ -23,4 +23,22 @@ class LitePress
 	{
 		return static::VERSION;
 	}
+	
+	public static function setting($setting)
+	{
+		static $settings;
+		
+		if ($settings === null)
+		{
+			$settings = array();
+			$r = DB::select()->from('settings')->execute();
+			foreach ($r->as_array() as $s)
+			{
+				$settings[$s['setting']] = $s['value'];
+			}
+			unset($r, $s);
+		}
+		
+		return $settings[$setting];
+	}
 }

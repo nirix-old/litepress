@@ -32,8 +32,8 @@ class Controller_Admin_Articles extends Controller_Backend
 	
 	public function action_new()
 	{
+		$this->title('New');
 		$this->view = $this->theme->view('admin/articles/new');
-		$this->template->title[] = 'New Article';
 		
 		$article = Model_Article::forge();
 		$this->view->set('article', $article);
@@ -62,6 +62,7 @@ class Controller_Admin_Articles extends Controller_Backend
 	
 	public function action_edit($article_id)
 	{
+		$this->title('Edit');
 		$this->view = $this->theme->view('admin/articles/edit');
 		
 		$article = Model_Article::find($article_id);

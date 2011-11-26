@@ -20,7 +20,7 @@ class Controller_Users extends Controller_Frontend
 {
 	public function action_login()
 	{
-		$this->template->title[] = 'Login';
+		$this->title('Login');
 		$this->view = $this->theme->view('users/login');
 		
 		if (Input::param() != array())
@@ -50,8 +50,8 @@ class Controller_Users extends Controller_Frontend
 
 	public function action_register()
 	{
+		$this->title('Register');
 		$this->view = $this->theme->view('users/register');
-		$this->template->title[] = 'Register';
 		
 		$user = Model_User::forge();
 		$this->view->set('user', $user);

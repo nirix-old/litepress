@@ -10,7 +10,7 @@
 	<body>
 		<div id="wrapper">
 			<header id="header">
-				<h1><?php echo Html::anchor('/', 'LitePress'); ?></h1>
+				<h1><?php echo Html::anchor('/', LitePress::setting('title')); ?></h1>
 				<nav id="nav">
 					<ul>
 					<?php if ($current_user->group->is_admin or $current_user->group->is_author): ?>
