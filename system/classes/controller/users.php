@@ -11,12 +11,12 @@
  * @package LitePress
  */
 
-class Controller_User extends Controller_Frontend
+class Controllers_User extends Controller_Frontend
 {
 	public function action_login()
 	{
 		$this->template->title[] = 'Login';
-		$this->template->content = $this->theme->view('user/login');
+		$this->template->content = $this->theme->view('users/login');
 	}
 
 	public function action_logout()
@@ -26,6 +26,6 @@ class Controller_User extends Controller_Frontend
 	public function action_register()
 	{
 		$this->template->title[] = 'Register';
-		$this->template->content = $this->theme->view('user/register');
+		$this->template->content = $this->theme->view('users/register');
 	}
 }
