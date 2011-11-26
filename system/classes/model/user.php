@@ -4,7 +4,7 @@
  * Copyright (C) Nirix
  *
  * @author Nirix <nrx@nirix.net>
- * @copyright LitePress Team
+ * @copyright Nirix
  * @license http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3-only
  */
 
@@ -17,7 +17,7 @@
 class Model_User extends Model_Base
 {
 	protected static $_table_name = 'users';
-	//protected static $_belongs_to = array('group');
+	protected static $_belongs_to = array('group');
 	
 	protected $_logged_in;
 	

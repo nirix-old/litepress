@@ -17,4 +17,7 @@ return array(
 	'_404_'   => 'errors/404',    // The main 404 route
 	
 	'(login|logout|register|usercp)' => 'users/$1', // User routes
+	
+	'-admin' => 'admin/dashboard/index',
+	'-admin/(:any)' => 'admin/$1/index',
 );
