@@ -36,7 +36,7 @@
 				<?php echo $content; ?>
 			</section>
 			<footer id="footer">
-				LitePress &copy; <?php echo Html::anchor('http://nirix.net/go=litepress', 'Nirix'); ?><br />Page rendered in {exec_time}s using {mem_usage}mb of memory.
+				LitePress <?php echo LitePress::version(); ?> &copy; <?php echo Html::anchor('http://nirix.net/go=litepress', 'Nirix'); ?><br />Page rendered in {exec_time}s using {mem_usage}mb of memory.
 			</footer>
 		</div>
 	</body>
