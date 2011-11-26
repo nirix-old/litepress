@@ -11,12 +11,12 @@
  * @package LitePress
  */
 
-class Controllers_User extends Controller_Frontend
+class Controller_Users extends Controller_Frontend
 {
 	public function action_login()
 	{
 		$this->template->title[] = 'Login';
-		$this->template->content = $this->theme->view('users/login');
+		$this->view = $this->theme->view('users/login');
 	}
 
 	public function action_logout()
@@ -25,7 +25,36 @@ class Controllers_User extends Controller_Frontend
 
 	public function action_register()
 	{
+		$this->view = $this->theme->view('users/register');
+		
+		$user = Model_User::forge();
+		
+		$this->view->set('user', $user);
 		$this->template->title[] = 'Register';
-		$this->template->content = $this->theme->view('users/register');
+		
+		
+		if (Input::param() != array())
+        {
+            $user->values(array(
+				'name' => Input::param('name'),
+				'username' => Input::param('username'),
+				'password' => Input::param('password'),
+				'email' => Input::param('email')
+			));
+			
+			if ($user->is_valid())
+			{
+				die('a');
+			}
+			else
+			{
+				$this->view->errors = $user->errors();
+			}
+        }
+		
+		if (isset($_POST['username']))
+		{
+			
+		}
 	}
 }

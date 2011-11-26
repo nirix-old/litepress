@@ -11,8 +11,9 @@
  * @package LitePress
  */
 
-class Model_User extends \Orm\Model
+class Model_User extends Model_Base
 {
+	public $_validation;
 	protected static $_table_name = 'users';
 	//protected static $_belongs_to = array('group');
 	
@@ -28,4 +29,16 @@ class Model_User extends \Orm\Model
 		'created_at',
 		'updated_at'
 	);
+	
+	public function is_valid()
+	{
+		parent::is_valid();
+		
+		$this->_validation->add_field('name', 'Full name', 'required|min_length[3]');
+		$this->_validation->add_field('username', 'Username', 'required|min_length[3]');
+		$this->_validation->add_field('password', 'Password', 'required|min_length[3]');
+		$this->_validation->add_field('email', 'Email', 'required|valid_email');
+		
+		return $this->_validation->run();
+	}
 }

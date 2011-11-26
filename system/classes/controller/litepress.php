@@ -14,6 +14,8 @@
 class Controller_LitePress extends \Controller
 {
 	public $theme;
+	public $view;
+	public $template;
 	public $auto_render = true;
 	public $_render = array(
 		'theme' => 'default',
@@ -36,6 +38,11 @@ class Controller_LitePress extends \Controller
 	
 	public function after($response)
 	{
+		if ($this->view !== null)
+		{
+			$this->template->content = $this->view;
+		}
+		
 		if ($this->auto_render === true and ! $response instanceof \Response)
 		{
 			$response = $this->response; 
