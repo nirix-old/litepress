@@ -22,6 +22,16 @@ class Model_Article extends \Orm\Model
 		'slug',
 		'body',
 		'user_id',
-		'status'
+		'status',
+		'created_at',
+		'updated_at'
+	);
+	
+	protected static $_observers = array(
+		'Orm\\Observer_Slug' => array(
+			'events' => array('before_insert'),
+			'source' => 'title',
+			'property' => 'slug',
+		),
 	);
 }

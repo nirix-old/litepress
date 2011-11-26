@@ -5,7 +5,7 @@
 			<?php echo $article->body; ?>
 		</div>
 		<div class="article_meta">
-			<?php echo $article->user->username; ?>
+			<?php echo Date::time_ago($article->created_at); ?> by <?php echo $article->user->username; ?>
 		</div>
 	</article>
 <?php endforeach; ?>
