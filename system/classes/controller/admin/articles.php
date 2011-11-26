@@ -17,9 +17,83 @@
  */
 class Controller_Admin_Articles extends Controller_Backend
 {
+	public function before()
+	{
+		parent::before();
+		
+		$this->template->title[] = 'Articles';
+	}
+	
 	public function action_index()
 	{
 		$this->view = $this->theme->view('admin/articles/index');
 		$this->view->set('articles', Model_Article::find('all'));
+	}
+	
+	public function action_new()
+	{
+		$this->view = $this->theme->view('admin/articles/new');
+		$this->template->title[] = 'New Article';
+		
+		$article = Model_Article::forge();
+		$this->view->set('article', $article);
+		
+		if (Input::param() != array())
+		{
+			$article->values(array(
+				'title' => Input::param('title'),
+				'body' => Input::param('body'),
+				'status' => Input::param('status'),
+				'user_id' => $this->current_user->id
+			));
+			
+			if ($article->is_valid())
+			{
+				$article->save();
+				Session::set_flash('success', 'Article created');
+				Response::redirect('-admin/articles');
+			}
+			else
+			{
+				$this->view->set('errors', $article->errors());
+			}
+		}
+	}
+	
+	public function action_edit($article_id)
+	{
+		$this->view = $this->theme->view('admin/articles/edit');
+		
+		$article = Model_Article::find($article_id);
+		$this->view->set('article', $article);
+		
+		if (Input::param() != array())
+		{
+			$article->values(array(
+				'title' => Input::param('title'),
+				'body' => Input::param('body'),
+				'status' => Input::param('status'),
+				'user_id' => $this->current_user->id
+			));
+			
+			if ($article->is_valid())
+			{
+				$article->save();
+				Session::set_flash('success', 'Article saved');
+				Response::redirect('-admin/articles');
+			}
+			else
+			{
+				$this->view->set('errors', $article->errors());
+			}
+		}
+	}
+	
+	public function action_delete($article_id)
+	{
+		$article = Model_Article::find($article_id);
+		$article->delete();
+		Session::set_flash('notice', 'Article deleted');
+		Response::redirect('-admin/articles');
 	}
 }

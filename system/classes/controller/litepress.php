@@ -36,6 +36,7 @@ class Controller_LitePress extends \Controller
 		
 		$this->template = $this->theme->view('layouts/' . $this->_render['layout']);
 		$this->template->title = array();
+		$this->template->set_global('theme', $this->theme);
 		
 		$this->_get_user();
 		

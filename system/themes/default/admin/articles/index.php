@@ -8,8 +8,8 @@
 	<tbody>
 	<?php foreach ($articles as $article): ?>
 		<tr>
-			<td><?php echo Html::anchor("-admin/articles/{$article->id}/edit", $article->title); ?></td>
-			<td></td>
+			<td><?php echo Html::anchor("-admin/articles/edit/{$article->id}", $article->title); ?></td>
+			<td><?php echo Html::anchor("-admin/articles/delete/{$article->id}", 'Delete'); ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

@@ -14,7 +14,7 @@
  * @author Nirix <nrx@nirix.net>
  * @since 0.1
  */
-class Model_Article extends \Orm\Model
+class Model_Article extends Model_Base
 {
 	protected static $_table_name = 'articles';
 	protected static $_belongs_to = array('user');
@@ -31,10 +31,28 @@ class Model_Article extends \Orm\Model
 	);
 	
 	protected static $_observers = array(
+		'Orm\\Observer_CreatedAt' => array('before_insert'),
+		'Orm\\Observer_UpdatedAt' => array('before_save'),
 		'Orm\\Observer_Slug' => array(
 			'events' => array('before_insert'),
 			'source' => 'title',
 			'property' => 'slug',
 		),
 	);
+	
+	public function href()
+	{
+		return "/";
+	}
+	
+	public function is_valid()
+	{
+		$this->enable_validation();
+				
+		$this->_validation->add_field('title', 'Title', 'required|min_length[3]');
+		$this->_validation->add_field('body', 'Article', 'required|min_length[3]');
+		$this->_validation->add_field('status', 'Status', 'required');
+		
+		return $this->_validation->run();
+	}
 }

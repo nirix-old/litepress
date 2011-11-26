@@ -21,6 +21,8 @@ class Controller_Backend extends Controller_LitePress
 	{
 		parent::before();
 		
+		$this->template->title[] = 'LitePress Admin';
+		
 		if (!$this->current_user->group->is_admin or !$this->current_user->group->is_author)
 		{
 			$this->redirect_no_permission();
