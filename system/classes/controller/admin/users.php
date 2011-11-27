@@ -64,4 +64,12 @@ class Controller_Admin_Users extends Controller_Backend
 			}
 		}
 	}
+	
+	public function action_delete($user_id)
+	{
+		$user = Model_User::find($user_id);
+		$user->delete();
+		Session::set_flash('notice', "User {$user->username} deleted");
+		Response::redirect('-admin/users');
+	}
 }
