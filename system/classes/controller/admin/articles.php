@@ -20,8 +20,7 @@ class Controller_Admin_Articles extends Controller_Backend
 	public function before()
 	{
 		parent::before();
-		
-		$this->template->title[] = 'Articles';
+		$this->title('Articles');
 	}
 	
 	public function action_index()

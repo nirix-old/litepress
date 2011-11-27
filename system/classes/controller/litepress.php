@@ -43,6 +43,11 @@ class Controller_LitePress extends \Controller
 		return parent::before();
 	}
 	
+	/**
+	 * Shortcut for adding to the page title array.
+	 * 
+	 * @param string $title
+	 */
 	public function title($title)
 	{
 		$this->template->title[] = $title;
@@ -75,6 +80,10 @@ class Controller_LitePress extends \Controller
 		$this->view = $this->theme->view('errors/no_permission');
 	}
 	
+	/**
+	 * Sets the error and login_redirect flash values and
+	 * redirects to the login page.
+	 */
 	public function redirect_no_permission()
 	{
 		Session::set_flash('error', 'It would appear that you don\'t have permission to access this page.');
@@ -82,6 +91,9 @@ class Controller_LitePress extends \Controller
 		Response::redirect('login');
 	}
 	
+	/**
+	 * Sets the response status and view content for the 404 page.
+	 */
 	public function show_404()
 	{
 		$this->response->status = 404;
@@ -92,6 +104,18 @@ class Controller_LitePress extends \Controller
 		
 		$this->template->title[] = $title;
 		$this->view->message_title = $title;
+	}
+	
+	public function usergroups_select_array()
+	{
+		$groups = array();
+		
+		foreach (Model_Group::find('all') as $group)
+		{
+			$groups[$group->id] = $group->name;
+		}
+		
+		return $groups;
 	}
 	
 	public function after($response)

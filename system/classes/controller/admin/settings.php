@@ -19,6 +19,11 @@ class Controller_Admin_Settings extends Controller_Backend
 {
 	public function action_index()
 	{
+		if (!$this->current_user->group->is_admin)
+		{
+			return $this->no_permission();
+		}
+		
 		$this->title('Settings');
 		$this->view = $this->theme->view('admin/settings/index');
 		
