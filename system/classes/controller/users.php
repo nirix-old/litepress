@@ -76,4 +76,17 @@ class Controller_Users extends Controller_Frontend
 			}
 		}
 	}
+	
+	public function action_usercp()
+	{
+		if (!$this->current_user->logged_in())
+		{
+			Session::set_flash('error', 'You need to be logged in to access is page');
+			Session::set_flash('login_redirect', Uri::current());
+			Response::redirect('login');
+		}
+		
+		$this->title('UserCP');
+		$this->view = $this->theme->view('users/usercp');
+	}
 }
