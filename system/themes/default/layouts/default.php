@@ -6,6 +6,8 @@
 		<link rel="stylesheet" href="<?php echo Uri::create('assets/css/screen.css'); ?>">
 		<link rel="stylesheet" href="<?php echo Uri::create('assets/css/master.css'); ?>">
 		<link rel="stylesheet" href="<?php echo Uri::create('assets/css/print.css'); ?>" media="print">
+		<?php echo Asset::js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'); ?>
+		<?php echo Asset::js('master.js'); ?>
 	</head>
 	<body>
 		<div id="wrapper">
