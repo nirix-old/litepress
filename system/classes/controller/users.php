@@ -88,5 +88,34 @@ class Controller_Users extends Controller_Frontend
 		
 		$this->title('UserCP');
 		$this->view = $this->theme->view('users/usercp');
+		
+		if (Input::param() != array())
+		{
+			$errors = array();
+			if (Model_User::authenticate_login($this->current_user->username, Input::param('current_password')))
+			{
+				$this->current_user->email = Input::param('email');
+				
+				if (Input::param('new_password'))
+				{
+					$this->current_user->password = Input::param('new_password');
+				}
+				
+				if ($this->current_user->is_valid())
+				{
+					$this->current_user->save();
+				}
+				else
+				{
+					$errors = $errors + $this->current_user->errors();
+				}
+			}
+			else
+			{
+				$errors[] = 'Current Password is invalid.';
+			}
+			
+			$this->view->set('errors', $errors);
+		}
 	}
 }

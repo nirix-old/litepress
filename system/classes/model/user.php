@@ -49,11 +49,11 @@ class Model_User extends Model_Base
 	public function is_valid()
 	{
 		$this->enable_validation();
-				
+		
 		$this->_validation->add_field('name', 'Full name', 'required|min_length[3]');
-		$this->_validation->add_field('username', 'Username', 'required|min_length[3]' . ($this->is_new() ? '|unique[users.username]' : ''));
+		$this->_validation->add_field('username', 'Username', 'min_length[3]' . ($this->is_new() ? '|required|unique[users.username]' : ''));
 		$this->_validation->add_field('password', 'Password', 'min_length[3]' . ($this->is_new() ? '|required' : ''));
-		$this->_validation->add_field('email', 'Email', 'required|valid_email' . ($this->is_new() ? '|unique[email]' : ''));
+		$this->_validation->add_field('email', 'Email', 'required|valid_email' . ($this->is_new() ? '|unique[users.email]' : ''));
 		
 		return $this->_validation->run();
 	}
