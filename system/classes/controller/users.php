@@ -91,11 +91,12 @@ class Controller_Users extends Controller_Frontend
 		
 		if (Input::param() != array())
 		{
-			$errors = array();
+			// Check if the current password is valid...
 			if (Model_User::authenticate_login($this->current_user->username, Input::param('current_password')))
 			{
 				$this->current_user->email = Input::param('email');
 				
+				// Set new password
 				if (Input::param('new_password'))
 				{
 					$this->current_user->password = Input::param('new_password');
@@ -107,7 +108,7 @@ class Controller_Users extends Controller_Frontend
 				}
 				else
 				{
-					$errors = $errors + $this->current_user->errors();
+					$errors = $this->current_user->errors();
 				}
 			}
 			else
