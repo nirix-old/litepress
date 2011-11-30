@@ -35,6 +35,7 @@ class Model_User extends Model_Base
 		'salt',
 		'email',
 		'name',
+		'validated',
 		'group_id' => array('default' => 4),
 		'login_hash',
 		'created_at',

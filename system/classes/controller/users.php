@@ -91,32 +91,34 @@ class Controller_Users extends Controller_Frontend
 		
 		if (Input::param() != array())
 		{
-			// Check if the current password is valid...
-			if (Model_User::authenticate_login($this->current_user->username, Input::param('current_password')))
+			// Set name and email
+			$this->current_user->name = Input::param('name');
+			$this->current_user->email = Input::param('email');
+			
+			// Set new password
+			if (Input::param('new_password'))
 			{
-				$this->current_user->email = Input::param('email');
+				$this->current_user->password = Input::param('new_password');
+			}
 				
-				// Set new password
-				if (Input::param('new_password'))
-				{
-					$this->current_user->password = Input::param('new_password');
-				}
-				
-				if ($this->current_user->is_valid())
-				{
-					$this->current_user->save();
-				}
-				else
-				{
-					$errors = $this->current_user->errors();
-				}
+			// Check if the current password is valid...
+			$auth = Model_User::authenticate_login($this->current_user->username, Input::param('current_password'));
+			if ($this->current_user->is_valid() and $auth)
+			{
+				$this->current_user->save();
+				Session::set_flash('success', 'Details saved');
+				Response::redirect('usercp');
 			}
 			else
 			{
-				$errors[] = 'Current Password is invalid.';
+				$errors = $this->current_user->errors();
+				if (!$auth)
+				{
+					$errors = array('Current password is invalid.') + $errors;
+				}
 			}
 			
-			$this->view->set('errors', $errors);
+			$this->view->set('errors', isset($errors) ? $errors : array());
 		}
 	}
 }

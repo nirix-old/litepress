@@ -13,6 +13,7 @@ class Create_users {
 			'salt' => array('constraint' => 15, 'type' => 'varchar'),
 			'email' => array('constraint' => 255, 'type' => 'varchar'),
 			'name' => array('constraint' => 255, 'type' => 'varchar'),
+			'validated' => array('constraint' => 1, 'type' => 'int'),
 			'group_id' => array('constraint' => 11, 'type' => 'int'),
 			'login_hash' => array('constraint' => 255, 'type' => 'varchar'),
 			'created_at' => array('constraint' => 11, 'type' => 'int'),

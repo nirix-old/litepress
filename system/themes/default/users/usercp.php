@@ -6,7 +6,7 @@
 	</div>
 <?php } ?>
 	<div class="group">
-		<?php echo Form::label('Current Password', 'current_password'); ?>
+		<?php echo Form::label('Current password', 'current_password'); ?>
 		<?php echo Form::password('current_password', '', array('id' => 'current_password')); ?>
 	</div>
 	<div class="group">
@@ -19,7 +19,7 @@
 	</div>
 	<div class="group">
 		<?php echo Form::label('New Password', 'new_password'); ?>
-		<?php echo Form::input('new_password', '', array('id' => 'new_password')); ?>
+		<?php echo Form::password('new_password', '', array('id' => 'new_password')); ?>
 	</div>
 	<div class="group">
 		<?php echo Form::submit('submit', 'Save'); ?>
