@@ -21,4 +21,13 @@ class Controller_Articles extends Controller_Frontend
 		$articles = Model_Article::find('all', array('where' => array('status' => 1), 'order_by' => array('created_at' => 'desc')));
 		$this->template->content = $this->theme->view('articles/index', array('articles' => $articles));
 	}
+	
+	public function action_show($article_id)
+	{
+		$article = Model_Article::find($this->param('id'));
+		$this->title($article->title);
+		
+		$this->view = $this->theme->view('articles/show');
+		$this->view->set('article', $article);
+	}
 }

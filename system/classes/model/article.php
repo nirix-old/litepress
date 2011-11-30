@@ -42,7 +42,7 @@ class Model_Article extends Model_Base
 	
 	public function href()
 	{
-		return "/";
+		return "/0000/00/" . $this->slug . '.' . $this->id;
 	}
 	
 	public function is_valid()

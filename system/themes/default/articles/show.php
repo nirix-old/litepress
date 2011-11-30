@@ -1,0 +1,1 @@
+<?php echo $theme->view('articles/_article', array('article' => $article)); ?>

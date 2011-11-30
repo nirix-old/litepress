@@ -16,6 +16,8 @@ return array(
 	'_root_'  => 'articles/index',  // The default route
 	'_404_'   => 'errors/404',    // The main 404 route
 	
+	'(:year)/(:month)/(:slug)\.(:id)' => 'articles/show/$4',
+	
 	'(login|logout|register|usercp)' => 'users/$1', // User routes
 	
 	'-admin' => 'admin/dashboard/index',
