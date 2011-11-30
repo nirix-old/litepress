@@ -26,11 +26,13 @@ class Model_Article extends Model_Base
 		'body',
 		'user_id',
 		'status',
+		'date',
 		'created_at',
 		'updated_at'
 	);
 	
 	protected static $_observers = array(
+		'Observer_Article',
 		'Orm\\Observer_CreatedAt' => array('before_insert'),
 		'Orm\\Observer_UpdatedAt' => array('before_save'),
 		'Orm\\Observer_Slug' => array(
@@ -42,7 +44,7 @@ class Model_Article extends Model_Base
 	
 	public function href()
 	{
-		return "/0000/00/" . $this->slug . '.' . $this->id;
+		return "/" . date("Y", $this->created_at) . "/" . date("d", $this->created_at) . "/" . $this->slug . '.' . $this->id;
 	}
 	
 	public function is_valid()

@@ -13,6 +13,7 @@ class Create_articles {
 			'body' => array('type' => 'text'),
 			'user_id' => array('constraint' => 11, 'type' => 'int'),
 			'status' => array('constraint' => 11, 'type' => 'int'),
+			'date' => array('type' => 'date'),
 			'created_at' => array('constraint' => 11, 'type' => 'int'),
 			'updated_at' => array('constraint' => 11, 'type' => 'int'),
 		), array('id'));
