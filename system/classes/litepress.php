@@ -41,4 +41,35 @@ class LitePress
 		
 		return $settings[$setting];
 	}
+	
+	public static function get_settings_info()
+	{
+		return array(
+			'title' => array(
+					'type' => 'input',
+					'label' => 'Title'
+				),
+			'theme' => array(
+					'type' => 'select',
+					'label' => 'Theme',
+					'options' => static::get_themes(),
+				),
+			'validate_users' => array(
+					'type' => 'yes_no',
+					'label' => 'Validate Users'
+				)
+		);
+	}
+	
+	public static function get_themes()
+	{
+		static $themes;
+		
+		if ($themes === null)
+		{
+			$themes = array();
+		}
+		
+		return $themes;
+	}
 }

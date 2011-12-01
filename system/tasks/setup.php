@@ -37,6 +37,7 @@ class Setup
 		echo "\nInserting defaults...";
 		\DB::insert('settings')->columns(array('setting', 'value'))->values(array('title', 'LitePress'))->execute();
 		\DB::insert('settings')->columns(array('setting', 'value'))->values(array('theme', 'default'))->execute();
+		\DB::insert('settings')->columns(array('setting', 'value'))->values(array('validate_users', '0'))->execute();
 		
 		$groups = array(
 			array('Admin', 1, 1, 1, 1, 1),

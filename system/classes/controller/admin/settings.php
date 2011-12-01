@@ -29,9 +29,13 @@ class Controller_Admin_Settings extends Controller_Backend
 		
 		if (Input::param() != array())
 		{
-			// This is very, VERY temporary, as there is pretty much
-			// only one setting so far...
-			Model_Setting::find(1)->values(array('value' => Input::param('title')))->save();
+			foreach (Input::param('settings') as $setting => $value)
+			{
+				$s = Model_Setting::find('first', array('where' => array('setting' => $setting)));
+				$s->value = $value;
+				$s->save();
+			}
+			
 			Session::set_flash('success', 'Settings saved');
 			Response::redirect(Uri::current());
 		}
