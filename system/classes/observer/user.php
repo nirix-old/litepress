@@ -19,7 +19,7 @@ class Observer_User extends Orm\Observer
 {
 	public function before_insert(Model_User $model)
 	{
-		$model->salt = rand(1000, 3000);
+		$model->salt = Str::random('alnum', 8);
 		$model->login_hash = sha1($model->salt . time() . $model->username);
 		$model->password = Model_User::hash_password($model->password, $model->salt);
 		$model->validated = 1; // For now, later it'll be controlled by the settings.
